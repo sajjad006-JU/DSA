@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+
 // creating a node structure
 typedef struct Node {
-    int data;
+    TreeNode* data;
     struct Node* next;
 } Node;
 
@@ -13,7 +20,7 @@ typedef struct Queue {
 } Queue;
 
 // function to create a node
-Node* createNode(int data) {
+Node* createNode(TreeNode* data) {
     Node* newNode=(Node *)malloc(sizeof(Node));
     newNode->data=data;
     newNode->next=NULL;
@@ -41,18 +48,18 @@ void enqueue(int data, Queue* queue) {
     return;
 }
 
-int dequeue(Queue* q) {
+TreeNode* dequeue(Queue* q) {
     if (q->front==NULL) {
-        return -1;
+        return NULL;
     }
-    int x=q->front->data;
+    TreeNode* x=q->front->data;
     q->front=q->front->next;
     return x;
 }
 
-int peek(Queue* q) {
+TreeNode* peek(Queue* q) {
     if (q->front==NULL) {
-        return -1;
+        return NULL;
     }
     return q->front->data;
 }
