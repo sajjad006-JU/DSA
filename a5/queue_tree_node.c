@@ -34,7 +34,7 @@ Queue* createQueue() {
     return q;
 }
 
-void enqueue(int data, Queue* queue) {
+void enqueue(TreeNode* data, Queue* queue) {
     struct Node* newNode=createNode(data);
 
     if (queue->front==NULL) {

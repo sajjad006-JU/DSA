@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "queue_tree_node.c"
 
-typedef struct TreeNode {
-    int val;
-    struct TreeNode* left;
-    struct TreeNode* right;
-} TreeNode;
+// typedef struct TreeNode {
+//     int val;
+//     struct TreeNode* left;
+//     struct TreeNode* right;
+// } TreeNode;
 
 TreeNode* createTreeNode(int value) {
     TreeNode* node=(TreeNode *) malloc(sizeof(TreeNode));
@@ -44,23 +44,26 @@ int main (int argc, char *argv[]) {
     Queue* q=createQueue();
     fscanf(fp, "%d", &x);
     TreeNode* root=createTreeNode(x);
+    enqueue(root, q);
 
     while (!isEmpty(q)) {
         TreeNode* node=dequeue(q);
 
         for (int i=0; i<2; i++) {
-            if(fscanf(fp, "%d", &x)) {
+            if(fscanf(fp, "%d ", &x)) {
+                printf("%d", x);
                 TreeNode* leftNode=createTreeNode(x);
                 node->left=leftNode;
-                enqueue(x, q);
+                enqueue(leftNode, q);
             } else {
                 break;
             }
 
-            if(fscanf(fp, "%d", &x)) {
-                TreeNode* rightNode=
-                node->right=x;
-                enqueue(x, q);
+            if(fscanf(fp, "%d ", &x)) {
+                printf("%d", x);
+                TreeNode* rightNode=createTreeNode(x);
+                node->right=rightNode;
+                enqueue(rightNode, q);
             } else {
                 break;
             }
@@ -70,5 +73,5 @@ int main (int argc, char *argv[]) {
             break;
     }
 
-    dfs(root);
+    // dfs(root);
 }
