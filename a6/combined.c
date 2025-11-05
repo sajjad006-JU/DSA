@@ -82,17 +82,17 @@ int main () {
     clock_t start, end;
     double time_taken;
 
-    int n=150000;
+    int n=200000;
     int arr[n];
 
     for (int i=0; i<n; i++) {
         // arr[i]=rand();
-        arr[i]=i;
+        arr[i]=n-i-1;
     }
 
     start = clock();
-    selectionSort(arr, n);
-    // quickSort(arr, 0, n-1);
+    // insertionSort(arr, n);
+    quickSort(arr, 0, n-1);
     end = clock();
     time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
 
