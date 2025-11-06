@@ -19,7 +19,7 @@ TreeNode* createTreeNode(int value) {
 void dfs(TreeNode* node) {
     if (node==NULL)
         return;
-    printf("%d", node->val);
+    printf("%d ", node->val);
     dfs(node->left);
     dfs(node->right);
     return;
@@ -29,14 +29,14 @@ int main (int argc, char *argv[]) {
     FILE *fp;
 
     if (argc!=2) {
-        printf("provide file name");
+        printf("provide file name\n");
         return 0;
     }
 
     fp=fopen(argv[1], "r");
 
     if (!fp) {
-        printf("Invalid file name!");
+        printf("Invalid file name!\n");
         return 0;
     }
 
@@ -49,29 +49,28 @@ int main (int argc, char *argv[]) {
     while (!isEmpty(q)) {
         TreeNode* node=dequeue(q);
 
-        for (int i=0; i<2; i++) {
-            if(fscanf(fp, "%d ", &x)) {
-                printf("%d", x);
-                TreeNode* leftNode=createTreeNode(x);
-                node->left=leftNode;
-                enqueue(leftNode, q);
-            } else {
-                break;
-            }
+        if(fscanf(fp, "%d", &x)) {
+            // printf("%d", x);
+            TreeNode* leftNode=createTreeNode(x);
+            node->left=leftNode;
+            enqueue(leftNode, q);
+        } else {
+            break;
+        }
 
-            if(fscanf(fp, "%d ", &x)) {
-                printf("%d", x);
-                TreeNode* rightNode=createTreeNode(x);
-                node->right=rightNode;
-                enqueue(rightNode, q);
-            } else {
-                break;
-            }
+        if(fscanf(fp, "%d", &x)) {
+            // printf("%d", x);
+            TreeNode* rightNode=createTreeNode(x);
+            node->right=rightNode;
+            enqueue(rightNode, q);
+        } else {
+            break;
         }
 
         if (feof(fp))
             break;
     }
 
-    // dfs(root);
+    dfs(root);
+    fclose(fp);
 }
